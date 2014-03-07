@@ -1,0 +1,42 @@
+{
+  "Code": {
+    "theme": "solarized_light",
+    "displayLineNumber": false
+  },
+  "Editor": {
+    "theme": "solarized dark",
+    "displayLineNumber": false,
+    "vimKeyBinding": false,
+    "autoPairCharacters": true,
+    "tabSize": 4,
+    "indentUnit": 4,
+    "indentWithTabs": false,
+    "displayActiveLine": true,
+    "fontSize": 13,
+    "userTheme": "default"
+  },
+  "General": {
+    "enableSyncScroll": true,
+    "playKeypressSound": false,
+    "enableAutoComplete": true,
+    "enableLastFileRestore": true,
+    "displayLanguage": "ko-kr",
+    "dateFormat": "LLL"
+  },
+  "Markdown": {
+    "tables": true,
+    "breaks": true,
+    "sanitize": false,
+    "smartLists": true,
+    "smartypants": true,
+    "mathjax": false,
+    "dollarSign": false
+  },
+  "Viewer": {
+    "theme": "haroopad",
+    "clickableLink": false,
+    "fontSize": 13,
+    "userTheme": "default"
+  },
+  "_version": "0.11.1"
+}
