@@ -1,0 +1,51 @@
+
+
+<기본>
+
+CTRL + SHIFT + { } : 괄호 이동
+
+ALT + T : 문서 설정 (font 변경)
+
+CTRL + M : 북마크
+
+ALT + , . : 이전, 다음 편집 위치
+
+F3, F4 : 이전, 다음 찾기
+
+CTRL + = : 정의
+
+CTRL + / : 전체 찾기
+
+<변경>
+
+CTR + T : header - cpp 토글 (macro)
+(CTRL 해재 +) ALT + H : 하이라이트
+
+CTRL + W : Window List
+
+
+
+------------
+
+
+# 창 10개 제한
+1) Options > Preferences > General 하단 Enable event handlers 체크.
+2) Base 프로젝트의 utils.em 에 아래 추가.
+
+event DocumentOpen(sFile)
+{
+   nHoldWnd = 10
+   winCnt = WndListCount()
+   if(winCnt > nHoldWnd) {
+      hWnd = GetCurrentWnd()
+      while(nHoldWnd-- != 0) {
+         hWnd = GetNextWnd(hWnd)
+      }
+
+      while(hWnd != 0) {
+         hTmpWnd = GetNextWnd(hWnd)
+         CloseWnd(hWnd)
+         hWnd = hTmpWnd
+      }
+   }
+}
