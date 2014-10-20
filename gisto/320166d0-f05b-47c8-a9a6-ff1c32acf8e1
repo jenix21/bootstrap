@@ -1,0 +1,25 @@
+{
+  "avatarUrl": "https://avatars.githubusercontent.com/u/341726?v=2",
+  "theme": "dark-blue",
+  "editor_theme": "twilight",
+  "editor_ext": {
+    "autocompletion": true,
+    "statusbar": true
+  },
+  "editor_vim_mode": false,
+  "min_lines": "0",
+  "max_lines": 50,
+  "version": "",
+  "timestamp": "",
+  "last_modified": "",
+  "token": "",
+  "username": "jenix21",
+  "gravatar_id": "",
+  "anim": 1,
+  "font_size": "13",
+  "ui_zoom": "90",
+  "followers": {
+    "list": [],
+    "lastUpdated": 1413512875735
+  }
+}
