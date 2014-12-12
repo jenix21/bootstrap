@@ -1,5 +1,5 @@
 
-import json
+import json, subprocess
 
 # Decorators - just used as a namespace.
 def Sublime(origin):
@@ -83,6 +83,12 @@ def makeNaverWebKit():
     sublime.add("Source")
     sublime.add("Tools").folder().include(["Tools/shared", "Tools/droid", "Tools/gtk", "Tools/efl", "Tools/jhbuild", "Tools/Scripts", "Tools/WebKitTestRunner", "Tools/TestWebKitAPI", "Tools/MiniBrowser"])
     sublime.make()
+
+@Git
+class GlobalConfig(object):
+    def __init__(self):
+        pass
+
 
 if __name__ == "__main__":
     makeNaverWebKit()
