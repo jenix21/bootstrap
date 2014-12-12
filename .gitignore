@@ -1,0 +1,34 @@
+#ignore thumbnails created by windows
+Thumbs.db
+#Ignore files build by Visual Studio
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.sdf
+*.opensdf
+*.bak
+*.cache
+*.ilk
+*.log
+[Bb]in
+[Dd]ebug/
+*.sbr
+obj/
+[Rr]elease*/
+_ReSharper*/
+#Ignore files build by Eclipse
+.classpath
+.settings/
+bin/
+gen/
+#Ignore other files
+*.lnk
+*.pyc
+*.so
+local.properties
+.idea/
