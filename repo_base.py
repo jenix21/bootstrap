@@ -1,5 +1,6 @@
 
-import json, subprocess
+import json, sys
+from subprocess import Popen, PIPE
 
 # Decorators - just used as a namespace.
 def Sublime(origin):
@@ -85,10 +86,31 @@ def makeNaverWebKit():
     sublime.make()
 
 @Git
-class GlobalConfig(object):
+class Config(object):
     def __init__(self):
-        pass
+        cmd = "cmd" if  "windows" in sys.platform else "sh"
+        shell  = Popen(cmd, stdin=PIPE, stdout=PIPE, shell=True)
+        self.git = shell.stdin
+        self.out = shell.stdout
+
+    def set(self, k, v):
+        c = "git config --global %s \"%s\"" % (k, v)
+        self.git.write(c)
+
+    def done(self):
+        self.git.close()
+        self.out.close()
+
+@Git
+def github():
+    git = Config()
+    git.set("user.name", "jongdeok.kim")
+    git.set("user.email", "devfrog@gmail.com")
+    git.done()
+
+@Git
+def work():
 
 
 if __name__ == "__main__":
-    makeNaverWebKit()
+    #makeNaverWebKit()
