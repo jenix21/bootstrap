@@ -9,6 +9,12 @@ def Sublime(origin):
 def Git(origin):
     return origin
 
+def Shell(origin):
+    return origin
+
+def Term(origin):
+    return origin
+
 @Sublime
 class FolderConfig(object):
     class _FSObject(object):
@@ -78,6 +84,74 @@ class Project(object):
     def __str__(self):
         return json.dumps(self.config, sort_keys=True, indent=4)
 
+@Git
+class Config(object):
+    def __init__(self, where=None):
+        cmd = "cmd" if  "windows" in sys.platform else "sh"
+        shell  = Popen(cmd, stdin=PIPE, stdout=PIPE, shell=True)
+        self.git = shell.stdin
+        self.out = shell.stdout
+        self.cmd = "git config {where} %s \"%s\"\n".format(where="" if not where else "--global")
+
+    def set(self, k, v):
+        c = self.cmd % (k, v)
+        #print c
+        self.git.write(c)
+        self.git.flush()
+
+    def done(self):
+        self.git.close()
+        self.out.close()
+
+@Git
+def user():
+    git = Config()
+    git.set("user.name", "jongdeok.kim")
+    git.set("user.email", "devfrog@gmail.com")
+    git.done()
+
+@Git
+def common():
+    git = Config()
+    git.set("color.branch", "auto")
+    git.set("color.diff", "auto")
+    git.set("color.interactive", "auto")
+    git.set("color.status", "auto")
+
+    git.set("alias.lg", "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all")
+    git.set("core.autocrlf", "input") # keep lf, if clrl occured from checkout, convert to lf.
+    git.set("core.filemode", "false") # ignore file mode changes.
+    git.done()
+
+@Git
+def attribute():
+    tool = "expand"
+    if "darwin" in sys.platform:
+        tool = "gexpand"
+        
+    git = Config()
+    git.set("filter.tab2spc.clean", "%s --initial -t 4" % tool)
+    git.set("filter.tab2spc.mudge", "%s --initial -t 4" % tool)
+    git.done()
+
+    with open(".git/info/attributes", "w+") as f:
+        f.write("*.cpp filter=tab2spc\n")
+        f.write("*.h filter=tab2spc\n")
+        f.write("*.java filter=tab2spc\n")
+        f.write("*.py filter=tab2spc\n")
+        f.write("*.sh filter=tab2spc\n")
+
+@Shell
+def Zsh():
+    # ZSH_THEME="pmcgee", home
+    pass
+
+@Term
+def Tmux():
+    pass
+
+# Generate file and config.
+
 @Sublime
 def makeNaverWebKit():
     sublime = Project("NaverWebKit")
@@ -86,31 +160,11 @@ def makeNaverWebKit():
     sublime.make()
 
 @Git
-class Config(object):
-    def __init__(self):
-        cmd = "cmd" if  "windows" in sys.platform else "sh"
-        shell  = Popen(cmd, stdin=PIPE, stdout=PIPE, shell=True)
-        self.git = shell.stdin
-        self.out = shell.stdout
-
-    def set(self, k, v):
-        c = "git config --global %s \"%s\"" % (k, v)
-        self.git.write(c)
-
-    def done(self):
-        self.git.close()
-        self.out.close()
-
-@Git
-def github():
-    git = Config()
-    git.set("user.name", "jongdeok.kim")
-    git.set("user.email", "devfrog@gmail.com")
-    git.done()
-
-@Git
-def work():
-
+def makeGitConfig():
+    user()
+    common()
+    attribute()
 
 if __name__ == "__main__":
     #makeNaverWebKit()
+    makeGitConfig()
