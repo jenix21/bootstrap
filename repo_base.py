@@ -91,7 +91,7 @@ class Config(object):
         shell  = Popen(cmd, stdin=PIPE, stdout=PIPE, shell=True)
         self.git = shell.stdin
         self.out = shell.stdout
-        self.cmd = "git config {where} %s \"%s\"\n".format(where="" if not where else "--global")
+        self.cmd = "git config {where} %s \"%s\"\n".format(where="" if where else "--global")
 
     def set(self, k, v):
         c = self.cmd % (k, v)
