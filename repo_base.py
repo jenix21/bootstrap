@@ -134,7 +134,7 @@ def attribute():
     git.set("filter.tab2spc.mudge", "%s --initial -t 4" % tool)
     git.done()
 
-    with open(".git/info/attributes", "w+") as f:
+    with open(".attributes", "w") as f:
         f.write("*.cpp filter=tab2spc\n")
         f.write("*.h filter=tab2spc\n")
         f.write("*.java filter=tab2spc\n")
