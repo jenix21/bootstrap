@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+if [[ $1 == "-h" ]];then
+    ./build-webkit --help 2>&1 | grep -i "droid"
+    exit 1
+fi
+
+if [[ $# == 0 ]];then
+    echo "# Build [Release]"    
+else
+    echo "# Build [$@]"
+fi
+
+_log="build.log"
+_err="error.log"
+
+./build-webkit --droid $@ 2> ${_log}
+
+if [[ $! != 0 ]];then
+    echo "# Error ------------------------------------------------"
+    cat ${_log} | grep "error:" > ${_err}
+    tail -10 ${_err}
+    echo "# Error ------------------------------------------------"
+
+    rm ${_log}
+fi
+
