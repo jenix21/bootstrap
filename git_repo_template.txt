@@ -1,0 +1,14 @@
+
+repository template mechanism.
+
+<template-dir>/hooks/<hook-name>
+<template-dir>/config
+<template-dir>/info/exclude
+<template-dir>/info/attributes
+
+git config --global init.templatedir '~/.git-templates'
+
+
+
+https://coderwall.com/p/jp7d5q/create-a-global-git-commit-hook
+http://superuser.com/questions/164213/global-git-hook
