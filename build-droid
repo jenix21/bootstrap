@@ -18,14 +18,15 @@ else
 fi
 
 _log="build.log"
+_tmp="tmp.log" # all error log
 _err="error.log"
 
-./build-webkit --droid $@ 2> ${_log}
+./build-webkit --droid $@ 2> ${_tmp} | tee  ${_log}
 
 if [[ $! != 0 && `stat -c%s ${_err}` != 0 ]];then
     _print "# Error ------------------------------------------------"
-    cat ${_log} | grep "error:" > ${_err}
+    cat ${_tmp} | grep "error:" > ${_err}
     tail -10 ${_err}
     _print "# Check all error messages in ${_err}"
-    rm ${_log}
+    rm ${_tmp}
 fi
