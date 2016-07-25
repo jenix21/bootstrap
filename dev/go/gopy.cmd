@@ -2,4 +2,4 @@
 
 set GOPATH=%cd%
 
-python go.py %*
+python %~dp0\\go.py %*
